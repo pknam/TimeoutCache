@@ -24,5 +24,5 @@ static void Main(string[] args)
 ```
 
 * if cache MISS, it returns `default(VALUE_TYPE)`
-* `default(int)` == 0
-* `default(string)` == null
+ * `default(int)` == 0
+ * `default(string)` == null
