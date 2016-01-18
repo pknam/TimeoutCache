@@ -13,14 +13,23 @@ namespace TimeoutCache
         {
             // set timeout as 3 sec
             TimeSpan cacheTimeout = new TimeSpan(0, 0, 3);
-            TimeoutCache<string, int> cache = new TimeoutCache<string, int>(cacheTimeout);
+
+            // KEY_TYPE : string
+            // VALUE_TYPE : int
+            TimeoutCache<string, int?> cache = new TimeoutCache<string, int?>(cacheTimeout);
 
             // set value
             cache["hihi"] = 10;
 
-            while(true)
+            while (true)
             {
-                Console.WriteLine(cache["hihi"]);
+                int? val = cache["hihi"];
+
+                if (val == null)
+                    Console.WriteLine("Cache miss");
+                else
+                    Console.WriteLine("Cache hit. value : {0}", val);
+
                 Thread.Sleep(200);
             }
         }

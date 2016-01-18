@@ -9,7 +9,7 @@ static void Main(string[] args)
     TimeSpan cacheTimeout = new TimeSpan(0, 0, 3);
 
     // KEY_TYPE : string
-    // VALUE_TYPE : int
+    // VALUE_TYPE : nullable int
     TimeoutCache<string, int?> cache = new TimeoutCache<string, int?>(cacheTimeout);
 
     // set value
@@ -33,4 +33,4 @@ static void Main(string[] args)
  * `default(int)` == 0
  * `default(string)` == null
 * using nullable type in VALUE_TYPE is recommended
- * like `TimeoutCache<string, int?>`
+ * like `TimeoutCache<string, int?>` or `TimeoutCache<string, string>`
