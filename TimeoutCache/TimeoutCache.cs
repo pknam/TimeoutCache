@@ -16,7 +16,7 @@ namespace TimeoutCache
         { }
     }
 
-    class TimeoutCache<K, V>
+    public class TimeoutCache<K, V>
     {
         class Value
         {

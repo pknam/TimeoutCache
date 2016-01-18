@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeoutCache", "TimeoutCache\TimeoutCache.csproj", "{F518D1AE-947A-49BF-84B9-1866EE299E2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample", "sample\sample.csproj", "{0073B376-714E-4760-B522-0655633D0329}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F518D1AE-947A-49BF-84B9-1866EE299E2C} = {F518D1AE-947A-49BF-84B9-1866EE299E2C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{F518D1AE-947A-49BF-84B9-1866EE299E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F518D1AE-947A-49BF-84B9-1866EE299E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F518D1AE-947A-49BF-84B9-1866EE299E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0073B376-714E-4760-B522-0655633D0329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0073B376-714E-4760-B522-0655633D0329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0073B376-714E-4760-B522-0655633D0329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0073B376-714E-4760-B522-0655633D0329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
