@@ -7,6 +7,9 @@ static void Main(string[] args)
 {
     // set timeout as 3 sec
     TimeSpan cacheTimeout = new TimeSpan(0, 0, 3);
+    
+    // KEY_TYPE : string
+    // VALUE_TYPE : int
     TimeoutCache<string, int> cache = new TimeoutCache<string, int>(cacheTimeout);
 
     // set value
