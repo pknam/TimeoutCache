@@ -6,6 +6,26 @@ using System.Threading.Tasks;
 
 namespace TimeoutCache
 {
+    public class TimeoutCacheMissException : Exception
+    {
+        public TimeoutCacheMissException()
+        { }
+
+        public TimeoutCacheMissException(string message)
+            : base(message)
+        { }
+    }
+
+    public class TimeoutCacheKeyNotFoundException : Exception
+    {
+        public TimeoutCacheKeyNotFoundException()
+        { }
+
+        public TimeoutCacheKeyNotFoundException(string message)
+            : base(message)
+        { }
+    }
+
     class TimeoutCache<K, V>
     {
         class Value
@@ -33,11 +53,16 @@ namespace TimeoutCache
         {
             get
             {
+                if (!_cache.ContainsKey(key))
+                    throw new TimeoutCacheKeyNotFoundException();
+
                 Value v = _cache[key];
-                
-                // cache miss
-                if(v.creationTime.Add(_invalidateTimeout) < DateTime.Now)
-                    return default(V);
+
+                if (v.creationTime.Add(_invalidateTimeout) < DateTime.Now)
+                {
+                    _cache.Remove(key);
+                    throw new TimeoutCacheMissException();
+                }
 
                 // cache hit
                 return v.value;
@@ -46,6 +71,16 @@ namespace TimeoutCache
             {
                 _cache.Add(key, new Value(DateTime.Now, value));
             }
+        }
+
+        public void Clear()
+        {
+            _cache.Clear();
+        }
+
+        public void Invalidate(K key)
+        {
+            _cache.Remove(key);
         }
     }
 }

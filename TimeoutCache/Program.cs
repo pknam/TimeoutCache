@@ -16,21 +16,30 @@ namespace TimeoutCache
 
             // KEY_TYPE : string
             // VALUE_TYPE : int
-            TimeoutCache<string, int?> cache = new TimeoutCache<string, int?>(cacheTimeout);
+            TimeoutCache<string, int> cache = new TimeoutCache<string, int>(cacheTimeout);
 
             // set value
             cache["hihi"] = 10;
 
             while (true)
             {
-                int? val = cache["hihi"];
-
-                if (val == null)
-                    Console.WriteLine("Cache miss");
-                else
+                try
+                {
+                    int val = cache["hihi"];
                     Console.WriteLine("Cache hit. value : {0}", val);
+                }
+                catch (TimeoutCacheMissException)
+                {
+                    Console.WriteLine("Cache miss");
+                }
+                catch (TimeoutCacheKeyNotFoundException)
+                {
+                    Console.WriteLine("Key not found");
+                    break;
+                }
 
-                Thread.Sleep(200);
+                // sleep 1 sec
+                Thread.Sleep(1000);
             }
         }
     }

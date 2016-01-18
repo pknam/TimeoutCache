@@ -2,6 +2,7 @@
 [C#] Cache implementation with Timeout
 
 ## Example
+### Source
 ```csharp
 static void Main(string[] args)
 {
@@ -9,28 +10,40 @@ static void Main(string[] args)
     TimeSpan cacheTimeout = new TimeSpan(0, 0, 3);
 
     // KEY_TYPE : string
-    // VALUE_TYPE : nullable int
-    TimeoutCache<string, int?> cache = new TimeoutCache<string, int?>(cacheTimeout);
+    // VALUE_TYPE : int
+    TimeoutCache<string, int> cache = new TimeoutCache<string, int>(cacheTimeout);
 
     // set value
     cache["hihi"] = 10;
 
-    while(true)
+    while (true)
     {
-        int? val = cache["hihi"];
-
-        if(val == null)
-            Console.WriteLine("Cache miss");
-        else
+        try
+        {
+            int val = cache["hihi"];
             Console.WriteLine("Cache hit. value : {0}", val);
+        }
+        catch (TimeoutCacheMissException)
+        {
+            Console.WriteLine("Cache miss");
+        }
+        catch (TimeoutCacheKeyNotFoundException)
+        {
+            Console.WriteLine("Key not found");
+            break;
+        }
 
-        Thread.Sleep(200);
+        // sleep 1 sec
+        Thread.Sleep(1000);
     }
 }
 ```
 
-* if cache MISS, it returns `default(VALUE_TYPE)`
- * `default(int)` == 0
- * `default(string)` == null
-* using nullable type in VALUE_TYPE is recommended
- * like `TimeoutCache<string, int?>` or `TimeoutCache<string, string>`
+### Result
+```
+Cache hit. value : 10
+Cache hit. value : 10
+Cache hit. value : 10
+Cache miss
+Key not found
+```
