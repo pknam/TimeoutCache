@@ -27,11 +27,6 @@ static void Main(string[] args)
         {
             Console.WriteLine("Cache miss");
         }
-        catch (TimeoutCacheKeyNotFoundException)
-        {
-            Console.WriteLine("Key not found");
-            break;
-        }
 
         // sleep 1 sec
         Thread.Sleep(1000);
@@ -45,5 +40,9 @@ Cache hit. value : 10
 Cache hit. value : 10
 Cache hit. value : 10
 Cache miss
-Key not found
+Cache miss
+Cache miss
+Cache miss
+...
+
 ```

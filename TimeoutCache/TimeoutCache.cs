@@ -16,16 +16,6 @@ namespace TimeoutCache
         { }
     }
 
-    public class TimeoutCacheKeyNotFoundException : Exception
-    {
-        public TimeoutCacheKeyNotFoundException()
-        { }
-
-        public TimeoutCacheKeyNotFoundException(string message)
-            : base(message)
-        { }
-    }
-
     class TimeoutCache<K, V>
     {
         class Value
@@ -54,7 +44,7 @@ namespace TimeoutCache
             get
             {
                 if (!_cache.ContainsKey(key))
-                    throw new TimeoutCacheKeyNotFoundException();
+                    throw new TimeoutCacheMissException();
 
                 Value v = _cache[key];
 

@@ -32,11 +32,6 @@ namespace TimeoutCache
                 {
                     Console.WriteLine("Cache miss");
                 }
-                catch (TimeoutCacheKeyNotFoundException)
-                {
-                    Console.WriteLine("Key not found");
-                    break;
-                }
 
                 // sleep 1 sec
                 Thread.Sleep(1000);
